@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.caglar.ktretrofitapi.R
 import com.caglar.ktretrofitapi.databinding.RowLayoutBinding
 import com.caglar.ktretrofitapi.model.CryptoModel
+import com.caglar.ktretrofitapi.view.MainActivity
+import retrofit2.Callback
 
 class RecyclerViewAdapter(private val cryptoList: ArrayList<CryptoModel>, private val listener: Listener) : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder>() {
     private val colors: Array<String> = arrayOf("#000000","#3D0000","#FF0000","#3E2C41","#1C0C5B","#E2703A","#52057B")
@@ -16,21 +18,10 @@ class RecyclerViewAdapter(private val cryptoList: ArrayList<CryptoModel>, privat
         fun onItemClick(cryptoModel: CryptoModel)
     }
 
-    class RowHolder(val binding: RowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(cryptoModel: CryptoModel, colors: Array<String>, position: Int, listener: Listener) {
-            itemView.setOnClickListener {
-                listener.onItemClick(cryptoModel)
-            }
-            binding.linearLayout.setBackgroundColor(Color.parseColor(colors[position % 7]))
-            binding.coinName.text = cryptoModel.currency
-            binding.coinPrice.text = cryptoModel.price
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RowHolder {
         //val view = LayoutInflater.from(parent.context).inflate(R.layout.row_layout,parent,false)
-        val view = RowLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return RowHolder(view)
+        val itemBinding = RowLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return RowHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: RowHolder, position: Int) {
@@ -39,5 +30,16 @@ class RecyclerViewAdapter(private val cryptoList: ArrayList<CryptoModel>, privat
 
     override fun getItemCount(): Int {
         return cryptoList.size
+    }
+
+    class RowHolder(private val binding: RowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(cryptoModel: CryptoModel, colors: Array<String>, position: Int, listener: Listener) {
+            binding.root.setOnClickListener {
+                listener.onItemClick(cryptoModel)
+            }
+            binding.linearLayout.setBackgroundColor(Color.parseColor(colors[position % 7]))
+            binding.coinName.text = cryptoModel.currency
+            binding.coinPrice.text = cryptoModel.price
+        }
     }
 }
