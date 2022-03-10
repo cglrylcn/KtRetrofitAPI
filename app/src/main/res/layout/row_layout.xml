@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,22 +9,20 @@
         android:id="@+id/coinName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BTC"
-        android:textSize="26sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        />
+        android:text="BTC"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/coinPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0.00597"
-        android:textSize="20sp"
-        android:textColor="@color/white"
         android:layout_margin="10dp"
-        />
+        android:text="0.00597"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>
